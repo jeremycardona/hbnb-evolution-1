@@ -10,17 +10,17 @@ class Reviews():
         self.__reviewid = Reviews.count
         self.__feedback = feedback
         self.__ratings = ratings
-        self.__created_at = datetime
-        self.__updated_at = datetime
+        self.__created_at = datetime.now()
+        self.__updated_at = datetime.now()
         Reviews.count += 1
     def create_review(self, feedback, ratings):
         self.__feedback = feedback
         self.__ratings = ratings
-        self.__updated_at = datetime
+        self.__updated_at = datetime.now()
     def update_review(self, feedback, ratings):
         self.__feedback = feedback
         self.__ratings = ratings
-        self.__updated_at = datetime
+        self.__updated_at = datetime.now()
     def get_review(self):
         return "Review: " + self.__feedback + " ratings: " + str(self.__ratings)
     def delete_review(self):
