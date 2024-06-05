@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 """Module for amenity class"""
 from datetime import datetime
+import uuid
 
 class Amenity():
     """Methods for amenity"""
-    count = 0
 
     def __init__(self, feature):
-        Amenity.count += 1  # Increment count only on instantiation
-        self.amenityid = Amenity.count
+        self.amenityid = uuid.uuid4()
         self.feature = [feature]
         self.__created_at = datetime.now()
         self.__updated_at = datetime.now()
@@ -25,15 +24,16 @@ class Amenity():
             raise IndexError("Index out of range")
 
     def get_amenity(self):
+        created_at_str = self.__created_at.strftime("%Y-%m-%d %H:%M:%S:%f")
+        updated_at_str = self.__updated_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         return {
-            "id": self.amenityid,
+            "amenityid": str(self.amenityid),
             "features": self.feature[:],
-            "created_at": self.__created_at,
-            "updated_at": self.__updated_at
+            "created_at": created_at_str,
+            "updated_at": updated_at_str
         }
     def delete_amenity(self):
         del self
-        Amenity.count -= 1
 
     def updated(self):
         return self.__updated_at

@@ -38,6 +38,8 @@ class Places:
         return cls(description, address, city, latitude, longitude, host, number_of_rooms, bathrooms, price_per_night, max_guests, amenities, reviews)
 
     def get_place(self):
+        created_at_str = self.__created_at.strftime("%Y-%m-%d %H:%M:%S:%f")
+        updated_at_str = self.__updated_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         return {
             "placeid": self.__placeid,
             "description": self.__description,
@@ -52,8 +54,8 @@ class Places:
             "max_guests": self.__max_guests,
             "amenities": self.__amenities,
             "reviews": self.__reviews,
-            "created_at": self.__created_at,
-            "updated_at": self.__updated_at
+            "created_at": created_at_str,
+            "updated_at": updated_at_str
         }
 
     def update_place(self, description=None, address=None, city=None, latitude=None, longitude=None,

@@ -32,13 +32,15 @@ class City:
         self.__updated_at = datetime.now()
 
     def get_city(self):
+        created_at_str = self.__created_at.strftime("%Y-%m-%d %H:%M:%S:%f")
+        updated_at_str = self.__updated_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         return {
             "cityid": self.__cityid,
             "cityname": self.cityname,
             "country": self.country.get_country(),
             "countryid": self.__countryid,
-            "created at": self.__created_at,
-            "updated at": self.__updated_at
+            "created at": created_at_str,
+            "updated at": updated_at_str
         }
 
     def delete_city(self):

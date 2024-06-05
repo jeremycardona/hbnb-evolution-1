@@ -25,7 +25,15 @@ class Reviews():
         self.__updated_at = datetime.now()
 
     def get_review(self):
-        return f"Review ID: {self.__reviewid}, Feedback: {self.__feedback}, Ratings: {self.__ratings}"
+        created_at_str = self.__created_at.strftime("%Y-%m-%d %H:%M:%S:%f")
+        updated_at_str = self.__updated_at.strftime("%Y-%m-%d %H:%M:%S:%f")
+        return {
+            "reviewid": self.__reviewid,
+            "feedback": self.__feedback,
+            "ratings": self.__ratings,
+            "created_at": created_at_str,
+            "updated_at": updated_at_str
+        }
 
     def delete_review(self):
         del self
@@ -37,3 +45,7 @@ print(review1.get_review())
 
 review2 = Reviews.create_review("great", 4)
 print(review2.get_review())
+
+review3 = Reviews()
+review3.create_review("aweesome", 5)
+print(review3.get_review())

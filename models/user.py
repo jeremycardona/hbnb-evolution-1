@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Module for user class"""
 from datetime import datetime
+import uuid
 
 class User():
     """Methods for User"""
@@ -8,6 +9,7 @@ class User():
     __users_by_email = {}
 
     def __init__(self, email=None, password=None, firstname=None, lastname=None):
+        self.__userid = uuid.uuid4()  # Generate a random UUID for user id
         self.__email = email
         self.__password = password
         self.firstname = firstname
@@ -38,14 +40,18 @@ class User():
         User.__users_by_email[email] = self
 
     def get_user(self):
+        created_at_str = self.__created_at.strftime("%Y-%m-%d %H:%M:%S:%f")
+        updated_at_str = self.__updated_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         return {
+            "userid": str(self.__userid),  # Convert UUID to string for JSON serialization
             "email": self.__email,
             "password": self.__password,
             "firstname": self.firstname,
             "lastname": self.lastname,
-            "created_at": self.__created_at,
-            "updated_at": self.__updated_at
+            "created_at": created_at_str,
+            "updated_at": updated_at_str
         }
+
     def delete_user(self):
         del self
         User.count -= 1
@@ -63,14 +69,14 @@ class User():
 
 try:
     host = User("example@example.com", "abc123", "John", "Smith")
-    print(host.get_user_email())
+    print(host.get_user()['email'])
 
     jeremy = User.create_user("new@example.com", "def456", "Jeremy", "Smith")
-    print(jeremy.get_user_email())
+    print(jeremy.get_user()['email'])
 
     # This will raise a ValueError
     jeremy.create_user("aaaa@example.com", "ghi789", "Jeremy", "Smith")
-    print(jeremy.get_user_email())
+    print(jeremy.get_user())
 
     print(User.get_emails())
 
