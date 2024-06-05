@@ -4,30 +4,64 @@ from country import Country
 from datetime import datetime
 
 
-class City(Country):
-    """methods for city"""
+class City:
+    """Methods for city"""
     count = 0
+    cities_by_id = {}
+
     def __init__(self, cityname, country: Country):
-        self.cityid = City.count
+        self.__cityid = City.count
         self.cityname = cityname
         self.country = country
-        self.countryid = country.get_id()
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        self.__countryid = country.get_id()
+        self.__created_at = datetime.now()
+        self.__updated_at = datetime.now()
+        City.cities_by_id[self.__cityid] = self
         City.count += 1
-    def create_city(self, cityname):
-        self.cityname = cityname
-        self.updated_at = datetime.now()
-    def update_city(self, cityname, country: Country):
-        self.cityname = cityname
-        self.countryid = country
-        self.updated_at = datetime.now()
-    def get_city(self):
-        return f"country and city:  {self.country.get_country()} {self.cityname}"
-    def delete_city(self):
-        del self
-        City.count -= 1
+    @classmethod
+    def create_city(cls, cityname, country: Country):
+        new_city = cls(cityname, country)
+        return new_city
 
-puertorico = Country("puerto rico")
-isabela = City("isabela", puertorico)
+    def update_city(self, cityname, country: Country):
+        if not isinstance(country, Country):
+            raise ValueError("country must be a valid Country instance")
+        self.cityname = cityname
+        self.country = country
+        self.__countryid = country.get_id()
+        self.__updated_at = datetime.now()
+
+    def get_city(self):
+        return {
+            "cityid": self.__cityid,
+            "cityname": self.cityname,
+            "country": self.country.get_country(),
+            "countryid": self.__countryid,
+            "created at": self.__created_at,
+            "updated at": self.__updated_at
+        }
+
+    def delete_city(self):
+        del City.cities_by_id[self.__cityid]
+        City.count -= 1
+        del self
+
+    @classmethod
+    def get_ids(cls):
+        return list(cls.cities_by_id.keys())
+
+# Example usage
+puertorico = Country("Puerto Rico")
+isabela = City("Isabela", puertorico)
 print(isabela.get_city())
+
+# Output the unique city IDs
+print(f"City ID for Isabela: {isabela.get_city()['cityid']}")
+
+# Create another city
+
+sanjuan = City.create_city("San juan", puertorico)
+sanjuan2 = City.create_city("San juan", puertorico)
+print(f"City ID for San Juan: {sanjuan.get_city()['cityid']}")
+# Get all city IDs
+print("All city IDs:", City.get_ids())
