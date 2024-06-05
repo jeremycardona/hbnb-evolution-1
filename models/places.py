@@ -2,18 +2,18 @@
 """Module for places class"""
 from datetime import datetime
 from user import User
+import uuid
 
 
 class Places:
     """Methods for Places"""
-    count = 0
     places_by_id = {}
 
     def __init__(self, description, address, city, latitude, longitude, host: User,
                  number_of_rooms, bathrooms, price_per_night, max_guests, amenities, reviews):
         if not isinstance(host, User):
             raise ValueError("Host must be a valid User")
-        self.__placeid = Places.count
+        self.__placeid = uuid.uuid4()  # Generate a unique UUID for each place
         self.__description = description
         self.__address = address
         self.__city = city
@@ -28,7 +28,6 @@ class Places:
         self.__reviews = reviews
         self.__created_at = datetime.now()
         self.__updated_at = datetime.now()
-        Places.count += 1
         Places.places_by_id[self.__placeid] = self
         host.add_place(self)
 
@@ -41,7 +40,7 @@ class Places:
         created_at_str = self.__created_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         updated_at_str = self.__updated_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         return {
-            "placeid": self.__placeid,
+            "placeid": str(self.__placeid),  # Convert UUID to string for serialization
             "description": self.__description,
             "address": self.__address,
             "city": self.__city,
@@ -88,7 +87,6 @@ class Places:
     def delete_place(self):
         self.__host.remove_place(self)  # Remove this place from the host's list of places
         del Places.places_by_id[self.__placeid]
-        Places.count -= 1
         del self
 
 # Example usage
@@ -117,3 +115,4 @@ print(f"Place ID for the modern condo: {place2.get_place()['placeid']}")
 
 # Get all place IDs
 print("All place IDs:", list(Places.places_by_id.keys()))
+

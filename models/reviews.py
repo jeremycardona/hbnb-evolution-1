@@ -1,14 +1,15 @@
 #!/usr/bin/python3
 """Module for reviews class"""
 from datetime import datetime
+import uuid
 
-class Reviews():
+class Reviews:
     """Methods for reviews"""
     count = 0
 
     def __init__(self, feedback="", ratings=None):
         Reviews.count += 1  # Increment count only on instantiation
-        self.__reviewid = Reviews.count
+        self.__reviewid = uuid.uuid4()  # Generate a unique UUID for each review
         self.__feedback = feedback
         self.__ratings = ratings
         self.__created_at = datetime.now()
@@ -28,7 +29,7 @@ class Reviews():
         created_at_str = self.__created_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         updated_at_str = self.__updated_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         return {
-            "reviewid": self.__reviewid,
+            "reviewid": str(self.__reviewid),  # Convert UUID to string for serialization
             "feedback": self.__feedback,
             "ratings": self.__ratings,
             "created_at": created_at_str,
@@ -46,6 +47,6 @@ print(review1.get_review())
 review2 = Reviews.create_review("great", 4)
 print(review2.get_review())
 
-review3 = Reviews()
-review3.create_review("aweesome", 5)
+review3 = Reviews.create_review("awesome", 5)
 print(review3.get_review())
+
