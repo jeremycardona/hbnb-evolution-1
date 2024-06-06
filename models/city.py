@@ -2,6 +2,7 @@
 """Module for city"""
 from country import Country
 from datetime import datetime
+import uuid
 
 
 class City:
@@ -10,7 +11,7 @@ class City:
     cities_by_id = {}
 
     def __init__(self, cityname, country: Country):
-        self.__cityid = City.count
+        self.__cityid = uuid.uuid4()
         self.cityname = cityname
         self.country = country
         self.__countryid = country.get_id()
@@ -35,7 +36,7 @@ class City:
         created_at_str = self.__created_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         updated_at_str = self.__updated_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         return {
-            "cityid": self.__cityid,
+            "cityid": str(self.__cityid),
             "cityname": self.cityname,
             "country": self.country.get_country(),
             "countryid": self.__countryid,

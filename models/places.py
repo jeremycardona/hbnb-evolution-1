@@ -24,7 +24,7 @@ class Places:
         self.__bathrooms = bathrooms
         self.__price_per_night = price_per_night
         self.__max_guests = max_guests
-        self.__amenities = amenities
+        self.__amenities = set(amenities)
         self.__reviews = reviews
         self.__created_at = datetime.now()
         self.__updated_at = datetime.now()
@@ -51,15 +51,17 @@ class Places:
             "bathrooms": self.__bathrooms,
             "price_per_night": self.__price_per_night,
             "max_guests": self.__max_guests,
-            "amenities": self.__amenities,
+            "amenities": list(self.__amenities),
             "reviews": self.__reviews,
             "created_at": created_at_str,
             "updated_at": updated_at_str
         }
-
+    
     def update_place(self, description=None, address=None, city=None, latitude=None, longitude=None,
                      number_of_rooms=None, bathrooms=None, price_per_night=None, max_guests=None,
                      amenities=None, reviews=None):
+        if host is not None and host != self.host:
+            raise ValueError("Host cannot be reassigned")
         if description is not None:
             self.__description = description
         if address is not None:
@@ -88,6 +90,16 @@ class Places:
         self.__host.remove_place(self)  # Remove this place from the host's list of places
         del Places.places_by_id[self.__placeid]
         del self
+    def add_amenity(self, amenity):
+        if amenity in self.__amenities:
+            raise ValueError("Amenity already added to this place")
+        self.__amenities.add(amenity)
+        self.__updated_at = datetime.now()
+    def remove_amenity(self, amenity):
+        if amenity not in self.__amenities:
+            raise ValueError("Amenity not found in this place")
+        self.__amenities.remove(amenity)
+        self.__updated_at = datetime.now()
 
 # Example usage
 # Assuming you have a User class with methods add_place and remove_place

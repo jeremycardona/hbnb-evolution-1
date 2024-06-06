@@ -7,7 +7,7 @@ class Amenity():
     """Methods for amenity"""
 
     def __init__(self, feature):
-        self.amenityid = uuid.uuid4()
+        self.__amenityid = uuid.uuid4()
         self.feature = [feature]
         self.__created_at = datetime.now()
         self.__updated_at = datetime.now()
@@ -27,7 +27,7 @@ class Amenity():
         created_at_str = self.__created_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         updated_at_str = self.__updated_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         return {
-            "amenityid": str(self.amenityid),
+            "amenityid": str(self.__amenityid),
             "features": self.feature[:],
             "created_at": created_at_str,
             "updated_at": updated_at_str
