@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Module for places class"""
 from datetime import datetime
-from user import User
+from models.user import User
 import uuid
 
 
@@ -14,6 +14,8 @@ class Places:
         if not isinstance(host, User):
             raise ValueError("Host must be a valid User")
         self.__placeid = uuid.uuid4()  # Generate a unique UUID for each place
+        # Validate geographical coordinates
+        self.__validate_coordinates(latitude, longitude)
         self.__description = description
         self.__address = address
         self.__city = city
@@ -30,6 +32,9 @@ class Places:
         self.__updated_at = datetime.now()
         Places.places_by_id[self.__placeid] = self
         host.add_place(self)
+         # Validate price per night and max guests
+        self.__validate_price_per_night(price_per_night)
+        self.__validate_max_guests(max_guests)
 
     @classmethod
     def create_place(cls, description, address, city, latitude, longitude, host: User,
@@ -58,10 +63,16 @@ class Places:
         }
     
     def update_place(self, description=None, address=None, city=None, latitude=None, longitude=None,
-                     number_of_rooms=None, bathrooms=None, price_per_night=None, max_guests=None,
+                     host=None, number_of_rooms=None, bathrooms=None, price_per_night=None, max_guests=None,
                      amenities=None, reviews=None):
         if host is not None and host != self.host:
             raise ValueError("Host cannot be reassigned")
+        if latitude is not None or longitude is not None:
+            self.__validate_coordinates(latitude, longitude)
+        if price_per_night is not None:
+            self.__validate_price_per_night(price_per_night)
+        if max_guests is not None:
+            self.__validate_max_guests(max_guests)
         if description is not None:
             self.__description = description
         if address is not None:
@@ -100,6 +111,19 @@ class Places:
             raise ValueError("Amenity not found in this place")
         self.__amenities.remove(amenity)
         self.__updated_at = datetime.now()
+    def __validate_coordinates(self, latitude, longitude):
+        if not (-90 <= latitude <= 90):
+            raise ValueError("Latitude must be between -90 and 90 degrees")
+        if not (-180 <= longitude <= 180):
+            raise ValueError("Longitude must be between -180 and 180 degrees")
+    
+    def __validate_price_per_night(self, price_per_night):
+        if not (price_per_night > 0):
+            raise ValueError("Price per night must be greater than zero")
+    
+    def __validate_max_guests(self, max_guests):
+        if not (max_guests > 0):
+            raise ValueError("Maximum guests must be greater than zero")
 
 # Example usage
 # Assuming you have a User class with methods add_place and remove_place

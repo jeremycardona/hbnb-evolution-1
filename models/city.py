@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Module for city"""
-from country import Country
+from models.country import Country
 from datetime import datetime
 import uuid
 

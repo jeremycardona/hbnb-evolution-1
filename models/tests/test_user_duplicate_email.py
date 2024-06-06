@@ -1,6 +1,6 @@
 # test_user_duplicate_email.py
 
-from user import User
+from models.user import User
 
 # Test creating multiple users with the same email
 def test_duplicate_email():

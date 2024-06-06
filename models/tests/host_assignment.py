@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 import pytest
-from places import Places
-from user import User
-from city import City
+from models.places import Places
+from models.user import User
+from models.city import City
 
 
 def test_place_host_assignment():

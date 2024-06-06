@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """test user creation validation"""
-from user import User
+from models.user import User
 
 
 # Helper function to validate email format

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Module that check retrieval mechanisms and ensure updates"""
 import pytest
-from amenity import Amenity
+from models.amenity import Amenity
 
 
 def test_create_amenity():

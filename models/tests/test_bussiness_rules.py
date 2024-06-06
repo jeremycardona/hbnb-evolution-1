@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """test bussiness logic"""
-from places import Places
-from user import User 
-from reviews import Reviews
-from amenity import Amenity
-from city import City
-from country import Country
+from models.places import Places
+from models.user import User 
+from models.reviews import Reviews
+from models.amenity import Amenity
+from models.city import City
+from models.country import Country
 
 
 def bussiness_rules():

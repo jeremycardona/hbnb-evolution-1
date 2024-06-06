@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """Module for testing amenity addition verifying that duplicates cannot be added to the same place"""
 import pytest
-from places import Places
-from user import User
-from city import City
-from country import Country
-from amenity import Amenity
+from models.places import Places
+from models.user import User
+from models.city import City
+from models.country import Country
+
+
 def test_add_amenities_to_place():
     # Create a user and a city
     host = User("host@example.com", "password123", "Alice", "Wonder")

@@ -1,5 +1,5 @@
 import pytest
-from user import User
+from models.user import User
 
 def test_update_user():
     # Create a user
