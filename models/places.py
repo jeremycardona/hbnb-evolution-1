@@ -37,15 +37,15 @@ class Places:
         self.__validate_max_guests(max_guests)
 
     @classmethod
-    def create_place(cls, description, address, city, latitude, longitude, host: User,
+    def create(cls, description, address, city, latitude, longitude, host: User,
                      number_of_rooms, bathrooms, price_per_night, max_guests, amenities, reviews):
         return cls(description, address, city, latitude, longitude, host, number_of_rooms, bathrooms, price_per_night, max_guests, amenities, reviews)
 
-    def get_place(self):
+    def get(self):
         created_at_str = self.__created_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         updated_at_str = self.__updated_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         return {
-            "placeid": str(self.__placeid),  # Convert UUID to string for serialization
+            "id": str(self.__placeid),  # Convert UUID to string for serialization
             "description": self.__description,
             "address": self.__address,
             "city": self.__city,
@@ -61,8 +61,7 @@ class Places:
             "created_at": created_at_str,
             "updated_at": updated_at_str
         }
-    
-    def update_place(self, description=None, address=None, city=None, latitude=None, longitude=None,
+    def update(self, description=None, address=None, city=None, latitude=None, longitude=None,
                      host=None, number_of_rooms=None, bathrooms=None, price_per_night=None, max_guests=None,
                      amenities=None, reviews=None):
         if host is not None and host != self.host:
@@ -97,7 +96,7 @@ class Places:
             self.__reviews = reviews
         self.__updated_at = datetime.now()
 
-    def delete_place(self):
+    def delete(self):
         self.__host.remove_place(self)  # Remove this place from the host's list of places
         del Places.places_by_id[self.__placeid]
         del self
@@ -124,31 +123,3 @@ class Places:
     def __validate_max_guests(self, max_guests):
         if not (max_guests > 0):
             raise ValueError("Maximum guests must be greater than zero")
-
-# Example usage
-# Assuming you have a User class with methods add_place and remove_place
-
-# Example user
-host = User("example@example.com", "abc123", "John", "Smith")
-
-# Create a place
-place1 = Places.create_place(
-    "Cozy Apartment", "123 Main St", "New York", 40.7128, -74.0060, host, 
-    2, 1, 150, 4, ["WiFi", "Kitchen"], ["Great place!", "Very clean"]
-)
-print(place1.get_place())
-
-# Output the unique place ID
-print(f"Place ID for the cozy apartment: {place1.get_place()['placeid']}")
-
-# Create another place
-place2 = Places.create_place(
-    "Modern Condo", "456 Elm St", "San Francisco", 37.7749, -122.4194, host,
-    3, 2, 250, 6, ["Pool", "Gym"], ["Awesome stay!", "Highly recommend"]
-)
-print(place2.get_place())
-print(f"Place ID for the modern condo: {place2.get_place()['placeid']}")
-
-# Get all place IDs
-print("All place IDs:", list(Places.places_by_id.keys()))
-

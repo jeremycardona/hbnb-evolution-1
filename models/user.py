@@ -22,13 +22,13 @@ class User():
             User.count += 1
 
     @classmethod
-    def create_user(cls, email, password, firstname, lastname):
+    def create(cls, email, password, firstname, lastname):
         if email in cls.__users_by_email:
             raise ValueError("Email already in use")
         new_user = cls(email, password, firstname, lastname)
         return new_user
 
-    def update_user(self, email, password, firstname, lastname):
+    def update(self, email, password, firstname, lastname):
         if email != self.__email and email in User.__users_by_email:
             raise ValueError("Email already in use")
         del User.__users_by_email[self.__email]
@@ -39,11 +39,11 @@ class User():
         self.__updated_at = datetime.now()
         User.__users_by_email[email] = self
 
-    def get_user(self):
+    def get(self):
         created_at_str = self.__created_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         updated_at_str = self.__updated_at.strftime("%Y-%m-%d %H:%M:%S:%f")
         return {
-            "userid": str(self.__userid),  # Convert UUID to string for JSON serialization
+            "id": str(self.__userid),  # Convert UUID to string for JSON serialization
             "email": self.__email,
             "password": self.__password,
             "firstname": self.firstname,
@@ -51,8 +51,8 @@ class User():
             "created_at": created_at_str,
             "updated_at": updated_at_str
         }
-
-    def delete_user(self):
+   
+    def delete(self):
         del self
         User.count -= 1
 
@@ -67,18 +67,3 @@ class User():
         return list(cls.__users_by_email.keys())
 
 
-try:
-    host = User("example@example.com", "abc123", "John", "Smith")
-    print(host.get_user()['email'])
-
-    jeremy = User.create_user("new@example.com", "def456", "Jeremy", "Smith")
-    print(jeremy.get_user()['email'])
-
-    # This will raise a ValueError
-    jeremy.create_user("aaaa@example.com", "ghi789", "Jeremy", "Smith")
-    print(jeremy.get_user())
-
-    print(User.get_emails())
-
-except ValueError as e:
-    print(e)
