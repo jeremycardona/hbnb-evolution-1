@@ -97,3 +97,7 @@ class DataManager(IPersistenceManager):
             self._write_storage(entity_type, storage_data)
         else:
             raise KeyError(f"Entity with ID {entity_id} not found in {entity_type} storage.")
+    
+    def get_all(self, entity_type):
+        storage_data = self._read_storage(entity_type)
+        return list(storage_data.values())

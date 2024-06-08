@@ -1,0 +1,18 @@
+{
+    "d666cc09-1ad3-4bb1-849e-d2941faa82eb": {
+        "id": "d666cc09-1ad3-4bb1-849e-d2941faa82eb",
+        "features": [
+            "Sofa"
+        ],
+        "created_at": "2024-06-08 17:37:12:822304",
+        "updated_at": "2024-06-08 17:37:12:822315"
+    },
+    "e370fdb7-333c-44af-8f60-edb9c8dad63e": {
+        "id": "e370fdb7-333c-44af-8f60-edb9c8dad63e",
+        "features": [
+            "Microwave"
+        ],
+        "created_at": "2024-06-08 17:37:29:275104",
+        "updated_at": "2024-06-08 17:37:29:275116"
+    }
+}

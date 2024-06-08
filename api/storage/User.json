@@ -1,0 +1,47 @@
+{
+    "e952a1ad-52c9-4cb3-b11c-3c03c15590b6": {
+        "id": "e952a1ad-52c9-4cb3-b11c-3c03c15590b6",
+        "email": "testuser@example.com",
+        "password": "password123",
+        "firstname": "Test",
+        "lastname": "User",
+        "created_at": "2024-06-08 10:33:02:403806",
+        "updated_at": "2024-06-08 10:33:02:403827"
+    },
+    "beb2b890-6155-46be-bea4-3d24de52d219": {
+        "id": "beb2b890-6155-46be-bea4-3d24de52d219",
+        "email": "testuser@example.com",
+        "password": "password123",
+        "firstname": "Test",
+        "lastname": "User",
+        "created_at": "2024-06-08 10:42:24:524597",
+        "updated_at": "2024-06-08 10:42:24:524618"
+    },
+    "b990e6c6-1fac-4a26-970b-2d987ac47821": {
+        "id": "b990e6c6-1fac-4a26-970b-2d987ac47821",
+        "email": "test@example.com",
+        "password": "password123",
+        "firstname": "Test",
+        "lastname": "User",
+        "created_at": "2024-06-08 10:47:41:750113",
+        "updated_at": "2024-06-08 10:47:41:750128"
+    },
+    "d102ec99-b710-4bc6-9f8a-493df78cd248": {
+        "id": "d102ec99-b710-4bc6-9f8a-493df78cd248",
+        "email": "test@example.com",
+        "password": "password123",
+        "firstname": "Test",
+        "lastname": "User",
+        "created_at": "2024-06-08 10:52:39:894328",
+        "updated_at": "2024-06-08 10:52:39:894340"
+    },
+    "cb12bf75-aac4-42b5-8dd7-db7617a2431a": {
+        "id": "cb12bf75-aac4-42b5-8dd7-db7617a2431a",
+        "email": "test@example.com",
+        "password": "password123",
+        "firstname": "Test",
+        "lastname": "User",
+        "created_at": "2024-06-08 12:06:08:768034",
+        "updated_at": "2024-06-08 12:06:08:768047"
+    }
+}
