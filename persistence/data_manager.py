@@ -4,6 +4,8 @@
 from persistence.persistance_manager import IPersistenceManager
 import json
 import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from models.user import User
 from models.places import Places
 from models.amenity import Amenity
@@ -57,7 +59,7 @@ class DataManager(IPersistenceManager):
 
     def save(self, entity):
         entity_type = type(entity).__name__
-        entity_id = entity.get()['id']
+        entity_id = entity.get().get('id', None) or entity.get().get('code')
         print(f"Saving entity: {entity_id} of type {entity_type}")
         storage_data = self._read_storage(entity_type)
         
@@ -81,7 +83,7 @@ class DataManager(IPersistenceManager):
 
     def update(self, entity):
         entity_type = type(entity).__name__
-        entity_id = entity.get()['id']
+        entity_id = entity.get().get('id', None) or entity.get().get('code')
         storage_data = self._read_storage(entity_type)
         if entity_id in storage_data:
             storage_data[entity_id] = self._convert_to_serializable(entity)

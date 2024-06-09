@@ -36,7 +36,7 @@ class City:
         return {
             "id": str(self.__cityid),
             "cityname": self.cityname,
-            "country": self.country.get_country(),
+            "country": self.country.get(),
             "created at": created_at_str,
             "updated at": updated_at_str
         }
