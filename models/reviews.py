@@ -36,6 +36,8 @@ class Reviews:
             "id": str(self.__reviewid),  # Convert UUID to string for serialization
             "feedback": self.__feedback,
             "ratings": self.__ratings,
+            "user": self.__user,
+            "place": self.__place,
             "created_at": created_at_str,
             "updated_at": updated_at_str
         }

@@ -1,0 +1,158 @@
+{
+    "edb9c9ee-b5c3-46d5-9629-dea8cd4c9df5": {
+        "id": "edb9c9ee-b5c3-46d5-9629-dea8cd4c9df5",
+        "feedback": "Super lindo el lugar me encanto muchisimo woooooooooooooooooooooooooooooooooo!",
+        "ratings": 4.5,
+        "user": {
+            "id": "cb12bf75-aac4-42b5-8dd7-db7617a2431a",
+            "email": "test@example.com",
+            "password": "password123",
+            "firstname": "Test",
+            "lastname": "User",
+            "created_at": "2024-06-08 12:06:08:768034",
+            "updated_at": "2024-06-08 12:06:08:768047"
+        },
+        "place": {
+            "id": "4545ea6c-5bdb-49ad-aeb5-c5eb0ecfbb92",
+            "description": "A mansion in the city center",
+            "address": "123 Main, City Center",
+            "city": "a81c513d-ebee-4f0a-8539-24eac3e62d77",
+            "latitude": 37.7749,
+            "longitude": -122.4194,
+            "host": "f30c45d2-51a1-49b0-82b3-d79e55d4316a",
+            "number_of_rooms": 10,
+            "bathrooms": 5,
+            "price_per_night": 350,
+            "max_guests": 10,
+            "amenities": [
+                "d666cc09-1ad3-4bb1-849e-d2941faa82eb"
+            ],
+            "reviews": [
+                "nice",
+                "petfriendly",
+                "cozy"
+            ],
+            "created_at": "2024-06-11 14:25:44:101933",
+            "updated_at": "2024-06-11 14:25:44:101936"
+        },
+        "created_at": "2024-06-11 16:12:49:804465",
+        "updated_at": "2024-06-11 16:12:49:804480"
+    },
+    "6e82fead-6feb-4024-87d8-4e195787dbc2": {
+        "id": "6e82fead-6feb-4024-87d8-4e195787dbc2",
+        "feedback": "Super lindo el lugar me encanto muchisimo woooooooooooooooooooooooooooooooooo!",
+        "ratings": 4.5,
+        "user": {
+            "id": "cb12bf75-aac4-42b5-8dd7-db7617a2431a",
+            "email": "test@example.com",
+            "password": "password123",
+            "firstname": "Test",
+            "lastname": "User",
+            "created_at": "2024-06-08 12:06:08:768034",
+            "updated_at": "2024-06-08 12:06:08:768047"
+        },
+        "place": {
+            "id": "4545ea6c-5bdb-49ad-aeb5-c5eb0ecfbb92",
+            "description": "A mansion in the city center",
+            "address": "123 Main, City Center",
+            "city": "a81c513d-ebee-4f0a-8539-24eac3e62d77",
+            "latitude": 37.7749,
+            "longitude": -122.4194,
+            "host": "f30c45d2-51a1-49b0-82b3-d79e55d4316a",
+            "number_of_rooms": 10,
+            "bathrooms": 5,
+            "price_per_night": 350,
+            "max_guests": 10,
+            "amenities": [
+                "d666cc09-1ad3-4bb1-849e-d2941faa82eb"
+            ],
+            "reviews": [
+                "nice",
+                "petfriendly",
+                "cozy"
+            ],
+            "created_at": "2024-06-11 14:25:44:101933",
+            "updated_at": "2024-06-11 14:25:44:101936"
+        },
+        "created_at": "2024-06-11 16:45:49:762247",
+        "updated_at": "2024-06-11 16:45:49:762263"
+    },
+    "55b47990-0e35-4fc8-8d61-b164ee55d811": {
+        "id": "55b47990-0e35-4fc8-8d61-b164ee55d811",
+        "feedback": "Super lindo el lugar me encanto muchisimo woooooooooooooooooooooooooooooooooo!",
+        "ratings": 4.5,
+        "user": {
+            "id": "cb12bf75-aac4-42b5-8dd7-db7617a2431a",
+            "email": "test@example.com",
+            "password": "password123",
+            "firstname": "Test",
+            "lastname": "User",
+            "created_at": "2024-06-08 12:06:08:768034",
+            "updated_at": "2024-06-08 12:06:08:768047"
+        },
+        "place": {
+            "id": "4545ea6c-5bdb-49ad-aeb5-c5eb0ecfbb92",
+            "description": "A mansion in the city center",
+            "address": "123 Main, City Center",
+            "city": "a81c513d-ebee-4f0a-8539-24eac3e62d77",
+            "latitude": 37.7749,
+            "longitude": -122.4194,
+            "host": "f30c45d2-51a1-49b0-82b3-d79e55d4316a",
+            "number_of_rooms": 10,
+            "bathrooms": 5,
+            "price_per_night": 350,
+            "max_guests": 10,
+            "amenities": [
+                "d666cc09-1ad3-4bb1-849e-d2941faa82eb"
+            ],
+            "reviews": [
+                "nice",
+                "petfriendly",
+                "cozy"
+            ],
+            "created_at": "2024-06-11 14:25:44:101933",
+            "updated_at": "2024-06-11 14:25:44:101936"
+        },
+        "created_at": "2024-06-11 16:47:20:915841",
+        "updated_at": "2024-06-11 16:47:20:915854"
+    },
+    "a7fff605-3090-47bd-afd4-01eaaea26511": {
+        "id": "a7fff605-3090-47bd-afd4-01eaaea26511",
+        "feedback": "Super lindo el lugar me encanto muchisimo woooooooooooooooooooooooooooooooooo!",
+        "ratings": 4.5,
+        "user": {
+            "id": "cb12bf75-aac4-42b5-8dd7-db7617a2431a",
+            "email": "test@example.com",
+            "password": "password123",
+            "firstname": "Test",
+            "lastname": "User",
+            "created_at": "2024-06-08 12:06:08:768034",
+            "updated_at": "2024-06-08 12:06:08:768047"
+        },
+        "place": {
+            "id": "4545ea6c-5bdb-49ad-aeb5-c5eb0ecfbb92",
+            "description": "A mansion in the city center",
+            "address": "123 Main, City Center",
+            "city": "a81c513d-ebee-4f0a-8539-24eac3e62d77",
+            "latitude": 37.7749,
+            "longitude": -122.4194,
+            "host": "f30c45d2-51a1-49b0-82b3-d79e55d4316a",
+            "number_of_rooms": 10,
+            "bathrooms": 5,
+            "price_per_night": 350,
+            "max_guests": 10,
+            "amenities": [
+                "d666cc09-1ad3-4bb1-849e-d2941faa82eb"
+            ],
+            "reviews": [
+                "nice",
+                "petfriendly",
+                "cozy"
+            ],
+            "created_at": "2024-06-11 14:25:44:101933",
+            "updated_at": "2024-06-11 14:25:44:101936"
+        },
+        "created_at": "2024-06-11 16:50:49:951633",
+        "updated_at": "2024-06-11 16:50:49:951645"
+    }
+}

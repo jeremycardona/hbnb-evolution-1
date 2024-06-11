@@ -9,11 +9,9 @@ class Places:
     """Methods for Places"""
     places_by_id = {}
 
-    def __init__(self, description, address, city, latitude, longitude, host: User,
+    def __init__(self, description, address, city, latitude, longitude, host,
                  number_of_rooms, bathrooms, price_per_night, max_guests, amenities, reviews):
-        if not isinstance(host, User):
-            raise ValueError("Host must be a valid User")
-        self.__placeid = uuid.uuid4()  # Generate a unique UUID for each place
+        self.__placeid = uuid.uuid4()
         # Validate geographical coordinates
         self.__validate_coordinates(latitude, longitude)
         self.__description = description
@@ -21,7 +19,7 @@ class Places:
         self.__city = city
         self.__latitude = latitude
         self.__longitude = longitude
-        self.__host = host
+        self.__host = host.get()['id']
         self.__number_of_rooms = number_of_rooms
         self.__bathrooms = bathrooms
         self.__price_per_night = price_per_night
@@ -51,7 +49,7 @@ class Places:
             "city": self.__city,
             "latitude": self.__latitude,
             "longitude": self.__longitude,
-            "host": self.__host.get_user(),
+            "host": self.__host,
             "number_of_rooms": self.__number_of_rooms,
             "bathrooms": self.__bathrooms,
             "price_per_night": self.__price_per_night,
@@ -97,7 +95,6 @@ class Places:
         self.__updated_at = datetime.now()
 
     def delete(self):
-        self.__host.remove_place(self)  # Remove this place from the host's list of places
         del Places.places_by_id[self.__placeid]
         del self
     def add_amenity(self, amenity):
