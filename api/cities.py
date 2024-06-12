@@ -3,13 +3,12 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from flask import Flask, request, jsonify
+from flask import Blueprint, request, jsonify
 from models.country import Country
 from models.city import City
 from persistence.data_manager import DataManager
 
-app = Flask(__name__)
-
+cities = Blueprint('cities', __name__)
 # Initialize the DataManager
 data_manager = DataManager()
 
@@ -29,13 +28,13 @@ for country_data in preloaded_countries:
     data_manager.save(country)
 
 
-@app.route('/countries', methods=['GET'])
+@cities.route('/countries', methods=['GET'])
 def get_countries():
     countries = data_manager.get_all('Country')
     return jsonify(countries)
 
 
-@app.route('/countries/<country_code>', methods=['GET'])
+@cities.route('/countries/<country_code>', methods=['GET'])
 def get_country(country_code):
     country = data_manager.get(country_code, 'Country')
     if country:
@@ -43,7 +42,7 @@ def get_country(country_code):
     return jsonify({"error": "Country not found"}), 404
 
 
-@app.route('/countries/<country_code>/cities', methods=['GET'])
+@cities.route('/countries/<country_code>/cities', methods=['GET'])
 def get_cities_by_country(country_code):
     country = data_manager.get(country_code, 'Country')
     if country:
@@ -52,7 +51,7 @@ def get_cities_by_country(country_code):
     return jsonify({"error": "Country not found"}), 404
 
 
-@app.route('/cities', methods=['POST'])
+@cities.route('/cities', methods=['POST'])
 def create_city():
     data = request.get_json()
     cityname = data.get('cityname')
@@ -68,13 +67,13 @@ def create_city():
     return jsonify(new_city.get()), 201
 
 
-@app.route('/cities', methods=['GET'])
+@cities.route('/cities', methods=['GET'])
 def get_all_cities():
     cities = data_manager.get_all('City')
     return jsonify(cities)
 
 
-@app.route('/cities/<city_id>', methods=['GET'])
+@cities.route('/cities/<city_id>', methods=['GET'])
 def get_city(city_id):
     city = data_manager.get(city_id, 'City')
     if city:
@@ -82,7 +81,7 @@ def get_city(city_id):
     return jsonify({"error": "City not found"}), 404
 
 
-@app.route('/cities/<city_id>', methods=['PUT'])
+@cities.route('/cities/<city_id>', methods=['PUT'])
 def update_city(city_id):
     city_data = data_manager.get(city_id, 'City')
     if not city_data:
@@ -103,7 +102,7 @@ def update_city(city_id):
     return jsonify(city.get())
 
 
-@app.route('/cities/<city_id>', methods=['DELETE'])
+@cities.route('/cities/<city_id>', methods=['DELETE'])
 def delete_city(city_id):
     city_data = data_manager.get(city_id, 'City')
     if city_data:
@@ -111,6 +110,3 @@ def delete_city(city_id):
         return jsonify({"message": "City deleted successfully"})
     return jsonify({"error": "City not found"}), 404
 
-
-if __name__ == '__main__':
-    app.run(debug=True)

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Module for places API"""
-from flask import Flask, request, jsonify
+from flask import Blueprint, request, jsonify
 import os
 import sys
 import uuid
@@ -10,11 +10,11 @@ from models.places import Places
 from models.user import User  # Assuming User class for host management
 from persistence.data_manager import DataManager  # Assuming data_manager for data operations
 
-app = Flask(__name__)
+places = Blueprint('places', __name__)
 data_manager = DataManager()  # Initialize your data manager instance
 
 
-@app.route('/places', methods=['POST'])
+@places.route('/places', methods=['POST'])
 def create_place():
     data = request.json
 
@@ -73,19 +73,19 @@ def create_place():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
     
-@app.route('/places', methods=['GET'])
+@places.route('/places', methods=['GET'])
 def get_all_places():
     all_places = [place.get() for place in Places.places_by_id.values()]
     return jsonify(all_places)
 
-@app.route('/places/<string:place_id>', methods=['GET'])
+@places.route('/places/<string:place_id>', methods=['GET'])
 def get_place(place_id):
     place = Places.places_by_id.get(uuid.UUID(place_id))
     if not place:
         return jsonify({'error': 'Place not found'}), 404
     return jsonify(place.get())
 
-@app.route('/places/<string:place_id>', methods=['PUT'])
+@places.route('/places/<string:place_id>', methods=['PUT'])
 def update_place(place_id):
     data = request.json
     place = Places.places_by_id.get(uuid.UUID(place_id))
@@ -135,7 +135,7 @@ def update_place(place_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 400
     
-@app.route('/places/<string:place_id>', methods=['DELETE'])
+@places.route('/places/<string:place_id>', methods=['DELETE'])
 def delete_place(place_id):
     place = Places.places_by_id.get(uuid.UUID(place_id))
     if not place:
@@ -148,6 +148,3 @@ def delete_place(place_id):
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(debug=True)

@@ -3,15 +3,15 @@
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from flask import Flask, request, jsonify
+from flask import Blueprint, request, jsonify
 from persistence.data_manager import DataManager
 from models.user import User
 
-app = Flask(__name__)
+users = Blueprint('users', __name__)
 data_manager = DataManager()
 
 # POST /users: Create a new user
-@app.route('/users', methods=['POST'])
+@users.route('/users', methods=['POST'])
 def create_user():
     data = request.json
     try:
@@ -22,13 +22,13 @@ def create_user():
         return jsonify({'error': str(e)}), 400
 
 # GET /users: Retrieve a list of all users
-@app.route('/users', methods=['GET'])
+@users.route('/users', methods=['GET'])
 def get_users():
     users = data_manager.get_all('User')
     return jsonify(users), 200
 
 # GET /users/<user_id>: Retrieve details of a specific user
-@app.route('/users/<user_id>', methods=['GET'])
+@users.route('/users/<user_id>', methods=['GET'])
 def get_user(user_id):
     user = data_manager.get(user_id, 'User')
     if user:
@@ -36,12 +36,10 @@ def get_user(user_id):
     return jsonify({'error': 'User not found'}), 404
 
 # PUT /users/<user_id>: Update an existing user
-@app.route('/users/<user_id>', methods=['PUT'])
+@users.route('/users/<user_id>', methods=['PUT'])
 def update_user(user_id):
     pass
 # DELETE /users/<user_id>: Delete a user
-@app.route('/users/<user_id>', methods=['DELETE'])
+@users.route('/users/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
     pass
-if __name__ == '__main__':
-    app.run(debug=True)

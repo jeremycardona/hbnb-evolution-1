@@ -4,7 +4,11 @@ from flask import Flask
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from api import amenities, cities, places, reviews, users
+from api.amenities import amenities
+from api.users import users
+from api.cities import cities
+from api.places import places
+from api.reviews import reviews
 from persistence.data_manager import DataManager
 
 def main():

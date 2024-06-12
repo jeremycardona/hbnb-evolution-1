@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Module for Reviews API"""
 
-from flask import Flask, jsonify, request
+from flask import Blueprint, jsonify, request
 from datetime import datetime
 import os
 import sys
@@ -11,12 +11,11 @@ from models.places import Places
 from models.reviews import Reviews
 from persistence.data_manager import DataManager
 
-app = Flask(__name__)
-app.config['JSON_SORT_KEYS'] = False
+reviews = Blueprint('reviews',__name__)
 data_manager = DataManager()  # Assuming DataManager handles data operations
 
 # Endpoint: Create a new review for a specified place
-@app.route('/places/<string:place_id>/reviews', methods=['POST'])
+@reviews.route('/places/<string:place_id>/reviews', methods=['POST'])
 def create_review(place_id):
     data = request.json
     user_id = data.get('user_id')
@@ -55,19 +54,19 @@ def create_review(place_id):
         return jsonify({'error': str(e)}), 400
 
 # Endpoint: Retrieve all reviews written by a specific user
-@app.route('/users/<string:user_id>/reviews', methods=['GET'])
+@reviews.route('/users/<string:user_id>/reviews', methods=['GET'])
 def get_user_reviews(user_id):
     user_reviews = [review for review in data_manager.get_all('Reviews') if review['user']['id'] == user_id]
     return jsonify(user_reviews), 200
 
 # Endpoint: Retrieve all reviews for a specific place
-@app.route('/places/<string:place_id>/reviews', methods=['GET'])
+@reviews.route('/places/<string:place_id>/reviews', methods=['GET'])
 def get_place_reviews(place_id):
     place_reviews = [review for review in data_manager.get_all('Reviews') if review['place']['id'] == place_id]
     return jsonify(place_reviews), 200
 
 # Endpoint: Retrieve detailed information about a specific review
-@app.route('/reviews/<string:review_id>', methods=['GET'])
+@reviews.route('/reviews/<string:review_id>', methods=['GET'])
 def get_review(review_id):
     review_data = data_manager.get(review_id, 'Reviews')
     if not review_data:
@@ -75,7 +74,7 @@ def get_review(review_id):
 
     return jsonify(review_data), 200
 
-@app.route('/reviews/<string:review_id>', methods=['PUT'])
+@reviews.route('/reviews/<string:review_id>', methods=['PUT'])
 def update_review(review_id):
     data = request.json
     rating = data.get('rating')
@@ -134,7 +133,7 @@ def update_review(review_id):
 
 
 # Endpoint: Delete a specific review
-@app.route('/reviews/<string:review_id>', methods=['DELETE'])
+@reviews.route('/reviews/<string:review_id>', methods=['DELETE'])
 def delete_review(review_id):
     try:
         data_manager.delete(review_id, 'Reviews')
@@ -142,6 +141,3 @@ def delete_review(review_id):
     
     except KeyError:
         return jsonify({'error': 'Review not found'}), 404
-
-if __name__ == '__main__':
-    app.run(debug=True)
