@@ -82,13 +82,21 @@ class DataManager(IPersistenceManager):
         return storage_data.get(entity_id)
 
     def update(self, entity):
-        entity_type = type(entity).__name__
-        entity_id = entity.get().get('id', None) or entity.get().get('code')
+        entity_type = type(entity).__name__  # Get the type (class name) of the entity
+        entity_id = entity.get('id', None)  # Get the ID of the entity
+        
+        # Read the current storage data for the entity type
         storage_data = self._read_storage(entity_type)
+        
+        # Check if the entity ID exists in the storage data
         if entity_id in storage_data:
+            # Update the storage data with the new entity properties
             storage_data[entity_id] = self._convert_to_serializable(entity)
+            
+            # Write the updated storage data back to the storage file
             self._write_storage(entity_type, storage_data)
         else:
+            # Raise an exception if the entity ID is not found in the storage
             raise KeyError(f"Entity with ID {entity_id} not found in {entity_type} storage.")
 
     def delete(self, entity_id, entity_type):

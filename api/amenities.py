@@ -47,14 +47,26 @@ def get_amenity(amenity_id):
 def update_amenity(amenity_id):
     if not request.json or 'name' not in request.json:
         return jsonify({'error': 'Invalid input'}), 400
+
+    # Retrieve amenity data from storage
     amenity_data = data_manager.get(amenity_id, 'Amenity')
     if not amenity_data:
         return jsonify({'error': 'Amenity not found'}), 404
-    amenity = Amenity(amenity_data['features'][0])
-    amenity.__dict__.update(amenity_data)
-    amenity.update(0, request.json['name'])
-    data_manager.update(amenity)
-    return jsonify(amenity.get()), 200
+
+    try:
+        # Update the amenity object with new data
+        amenity = Amenity(amenity_data['features'][0])
+        amenity.__dict__.update(amenity_data)
+        amenity.update(0, request.json['name'])
+        
+        # Save the updated amenity back to storage
+        data_manager.update(amenity)
+        
+        return jsonify(amenity.get()), 200
+    except Exception as e:
+        # Log the exception for debugging purposes
+        print(f"Error updating amenity: {str(e)}")
+        return jsonify({'error': 'Failed to update amenity'}), 500
 
 # DELETE /amenities/<amenity_id>: Delete a specific amenity
 @amenities.route('/amenities/<amenity_id>', methods=['DELETE'])

@@ -1,0 +1,12 @@
+{
+    "d71fbd7f-ef59-4f28-8fd3-92d11365c4dd": {
+        "id": "d71fbd7f-ef59-4f28-8fd3-92d11365c4dd",
+        "cityname": "New City",
+        "country": {
+            "name": "United States",
+            "code": "US"
+        },
+        "created at": "2024-06-14 17:09:55:023389",
+        "updated at": "2024-06-14 17:09:55:023407"
+    }
+}

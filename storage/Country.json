@@ -1,4 +1,8 @@
 {
+    "US": {
+        "name": "United States",
+        "code": "US"
+    },
     "GB": {
         "name": "United Kingdom",
         "code": "GB"
@@ -7,14 +11,6 @@
         "name": "France",
         "code": "FR"
     },
-    "RD": {
-        "name": "Dominican Republic",
-        "code": "RD"
-    },
-    "US": {
-        "name": "United States",
-        "code": "US"
-    },
     "PR": {
         "name": "Puerto Rico",
         "code": "PR"
@@ -22,5 +18,9 @@
     "MX": {
         "name": "Mexico",
         "code": "MX"
+    },
+    "RD": {
+        "name": "Dominican Republic",
+        "code": "RD"
     }
 }

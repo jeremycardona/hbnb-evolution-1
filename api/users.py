@@ -38,8 +38,30 @@ def get_user(user_id):
 # PUT /users/<user_id>: Update an existing user
 @users.route('/users/<user_id>', methods=['PUT'])
 def update_user(user_id):
-    pass
+    data = request.json
+    user = data_manager.get(user_id, 'User')
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+    
+    try:
+        email = data.get('email')
+        password = data.get('password')
+        firstname = data.get('firstname')
+        lastname = data.get('lastname')
+        
+        user.update(email=email, password=password, firstname=firstname, lastname=lastname)
+        data_manager.update(user) 
+        return jsonify(user.get()), 200
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
+
+
 # DELETE /users/<user_id>: Delete a user
 @users.route('/users/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
-    pass
+    user = data_manager.get(user_id, 'User')
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+    
+    data_manager.delete(user_id, 'User')
+    return jsonify({'message': 'User deleted'}), 200
